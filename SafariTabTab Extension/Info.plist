@@ -36,7 +36,7 @@
 			<key>Image</key>
 			<string>ToolbarItemIcon.png</string>
 			<key>Label</key>
-			<string>Safari Tab Tab</string>
+			<string>Switch Tab</string>
 		</dict>
 		<key>SFSafariWebsiteAccess</key>
 		<dict>

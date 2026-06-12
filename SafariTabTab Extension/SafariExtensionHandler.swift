@@ -1,16 +1,85 @@
 import SafariServices
 
 final class SafariExtensionHandler: SFSafariExtensionHandler {
+    private var commandObserverToken: UnsafeMutableRawPointer?
+
+    override init() {
+        super.init()
+        installCommandObserver()
+    }
+
+    deinit {
+        if let commandObserverToken {
+            CFNotificationCenterRemoveObserver(
+                CFNotificationCenterGetDarwinNotifyCenter(),
+                commandObserverToken,
+                CFNotificationName(TabCommandRelay.darwinNotification as CFString),
+                nil
+            )
+        }
+    }
+
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String: Any]?) {
+        handleExtensionMessage(messageName, userInfo: userInfo)
+    }
+
+    override func messageReceivedFromContainingApp(withName messageName: String, userInfo: [String: Any]?) {
+        if messageName == SafariTabTabConstants.ExtensionCommand.activateTab.rawValue {
+            guard let tabID = intValue(userInfo?["tabID"]) else { return }
+            Task { await activateTab(id: tabID) }
+            return
+        }
+        handleExtensionMessage(messageName, userInfo: userInfo)
+    }
+
+    override func validateToolbarItem(in window: SFSafariWindow, validationHandler: @escaping (Bool, String) -> Void) {
+        Task {
+            await TabHistorySync.updateHistory(for: window)
+            await processRelayedCommandIfNeeded()
+        }
+        validationHandler(true, "")
+    }
+
+    override func toolbarItemClicked(in window: SFSafariWindow) {
+        Task { await quickSwitch() }
+    }
+
+    override func popoverViewController() -> SFSafariExtensionViewController {
+        SafariExtensionViewController.shared
+    }
+
+    private func installCommandObserver() {
+        let token = Unmanaged.passUnretained(self).toOpaque()
+        commandObserverToken = token
+        CFNotificationCenterAddObserver(
+            CFNotificationCenterGetDarwinNotifyCenter(),
+            token,
+            { _, observer, _, _, _ in
+                guard let observer else { return }
+                let handler = Unmanaged<SafariExtensionHandler>.fromOpaque(observer).takeUnretainedValue()
+                Task { await handler.processRelayedCommandIfNeeded() }
+            },
+            TabCommandRelay.darwinNotification as CFString,
+            nil,
+            .deliverImmediately
+        )
+    }
+
+    private func processRelayedCommandIfNeeded() async {
+        guard let payload = TabCommandRelay.takePending() else { return }
+        handleExtensionMessage(payload.command, userInfo: payload.backward ? ["backward": true] : nil)
+    }
+
+    private func handleExtensionMessage(_ messageName: String, userInfo: [String: Any]?) {
         Task {
             switch messageName {
             case "quickSwitch":
                 await quickSwitch()
             case "pickerOpen":
-                let backward = (userInfo?["backward"] as? Bool) ?? false
+                let backward = boolValue(userInfo?["backward"])
                 await openPicker(backward: backward)
             case "pickerStep":
-                let backward = (userInfo?["backward"] as? Bool) ?? false
+                let backward = boolValue(userInfo?["backward"])
                 notifyPickerStep(backward: backward)
             case "pickerCommit":
                 notifyPickerCommit()
@@ -20,34 +89,22 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
         }
     }
 
-    override func validateToolbarItem(in window: SFSafariWindow, validationHandler: @escaping (Bool, String) -> Void) {
-        Task {
-            await TabHistorySync.updateHistory(for: window)
-        }
-        validationHandler(true, "")
-    }
-
-    override func messageReceivedFromContainingApp(withName messageName: String, userInfo: [String: Any]?) {
-        guard let command = SafariTabTabConstants.ExtensionCommand(rawValue: messageName) else { return }
-        switch command {
-        case .activateTab:
-            guard let tabID = userInfo?["tabID"] as? Int else { return }
-            Task {
-                await activateTab(id: tabID)
-            }
-        }
-    }
-
-    override func popoverViewController() -> SFSafariExtensionViewController {
-        SafariExtensionViewController.shared
-    }
-
     private func quickSwitch() async {
         guard let window = await SFSafariApplication.activeWindow() else { return }
-        let windowID = await TabHistorySync.windowID(for: window)
+        let tabs = await window.allTabs()
+        guard tabs.count >= 2 else { return }
+
+        guard let activeTab = await window.activeTab(),
+              let activeIndex = tabs.firstIndex(of: activeTab) else { return }
+
+        let targetIndex = LiveMRUStore.previousTab(
+            for: window,
+            activeIndex: activeIndex,
+            tabCount: tabs.count
+        )
+
+        await activateTab(id: targetIndex, in: window)
         await TabHistorySync.updateHistory(for: window)
-        guard let tabID = TabHistoryStore.previousTabID(in: windowID) else { return }
-        await activateTab(id: tabID, in: window)
     }
 
     private func openPicker(backward: Bool) async {
@@ -89,13 +146,48 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
         let tabs = await window.allTabs()
         guard tabs.indices.contains(id) else { return }
         await tabs[id].activate()
+        LiveMRUStore.recordActivation(tabID: id, in: window)
         await TabHistorySync.recordActivation(tabID: id, in: window)
         SFSafariApplication.setToolbarItemsNeedUpdate()
+    }
+
+    private func boolValue(_ value: Any?) -> Bool {
+        if let value = value as? Bool { return value }
+        if let value = value as? NSNumber { return value.boolValue }
+        return false
+    }
+
+    private func intValue(_ value: Any?) -> Int? {
+        if let value = value as? Int { return value }
+        if let value = value as? NSNumber { return value.intValue }
+        return nil
     }
 }
 
 final class SafariExtensionViewController: SFSafariExtensionViewController {
-    static let shared = SafariExtensionViewController()
+    static let shared = SafariExtensionViewController.sharedInstance
+    private static let sharedInstance = SafariExtensionViewController()
+}
+
+/// In-memory MRU — stable per Safari window object, not URL-based.
+enum LiveMRUStore {
+    private static var mruByWindow: [ObjectIdentifier: [Int]] = [:]
+
+    static func recordActivation(tabID: Int, in window: SFSafariWindow) {
+        let key = ObjectIdentifier(window)
+        var mru = mruByWindow[key] ?? []
+        mru.removeAll { $0 == tabID }
+        mru.append(tabID)
+        mruByWindow[key] = mru
+    }
+
+    static func previousTab(for window: SFSafariWindow, activeIndex: Int, tabCount: Int) -> Int {
+        let key = ObjectIdentifier(window)
+        if let mru = mruByWindow[key], mru.count >= 2, mru.last == activeIndex {
+            return mru[mru.count - 2]
+        }
+        return (activeIndex - 1 + tabCount) % tabCount
+    }
 }
 
 enum TabHistorySync {
@@ -146,6 +238,7 @@ enum TabHistorySync {
            let activeIndex = safariTabs.firstIndex(of: activeTab) {
             history.mruTabIDs.removeAll { $0 == activeIndex }
             history.mruTabIDs.append(activeIndex)
+            LiveMRUStore.recordActivation(tabID: activeIndex, in: window)
         } else if history.mruTabIDs.isEmpty {
             history.mruTabIDs = snapshots.map(\.id)
         }

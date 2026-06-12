@@ -20,5 +20,6 @@ enum SafariTabTabConstants {
     enum StoreKey {
         static let installDate = "installDate"
         static let windows = "windows"
+        static let pendingCommand = "pendingCommand"
     }
 }

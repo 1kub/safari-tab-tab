@@ -1,4 +1,5 @@
 .DS_Store
+.xcode-team
 .derivedData/
 DerivedData/
 xcuserdata/

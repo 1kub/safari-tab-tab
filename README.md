@@ -4,8 +4,58 @@ A lightweight Safari extension for **MRU tab switching** with `Control+Tab` (Fir
 
 - macOS 13+
 - Native Swift, no network calls, no analytics
-- Menu bar agent (no Dock icon)
+- Background agent (no Dock icon, no menu bar clutter)
 - Open source (MIT)
+
+## Quick install
+
+```bash
+git clone https://github.com/1kub/safari-tab-tab.git ~/Documents/safari-tab-tab
+cd ~/Documents/safari-tab-tab
+chmod +x Scripts/install.sh
+./Scripts/install.sh --setup    # one-time: Xcode signing (~1 min)
+./Scripts/install.sh            # build + install + open Safari settings
+```
+
+Then in Safari (2 clicks):
+1. Turn on **Safari Tab Tab Extension**
+2. **Always Allow on Every Website**
+
+Keep the **Switch Tab** button in the Safari toolbar.
+
+## What `install.sh` does for you
+
+- Builds the app with automatic provisioning (`-allowProvisioningUpdates`)
+- Installs to `/Applications/Safari Tab Tab.app`
+- Launches the app
+- Opens **Safari → Extensions** settings
+- Removes quarantine flags when possible
+
+## One-time Xcode signing
+
+Required once per Mac (free Apple ID is enough):
+
+```bash
+./Scripts/install.sh --setup
+```
+
+In Xcode: set **Team** on both targets → press **⌘B** once.
+
+Optional — skip Xcode next time by saving your Team ID:
+
+```bash
+echo YOUR_TEAM_ID > .xcode-team
+```
+
+Find Team ID in Xcode → Settings → Accounts → your Apple ID → Team ID.
+
+## Re-install after 7 days (free Apple ID)
+
+```bash
+./Scripts/install.sh
+```
+
+To stop the background app: `pkill -x "Safari Tab Tab"`
 
 ## Behavior
 
@@ -17,53 +67,11 @@ A lightweight Safari extension for **MRU tab switching** with `Control+Tab` (Fir
 | `Ctrl+Shift+Tab` | Move backward in history |
 | Release `Ctrl` | Switch to the selected tab |
 
-## Clone
+## What cannot be automated (Apple limits)
 
-```bash
-git clone https://github.com/1kub/safari-tab-tab.git ~/Documents/safari-tab-tab
-cd ~/Documents/safari-tab-tab
-```
-
-## First-time setup (free Apple ID)
-
-1. Open `SafariTabTab.xcodeproj` in Xcode.
-2. In both targets (`Safari Tab Tab`, `Safari Tab Tab Extension`), set **Signing & Capabilities** to your Apple ID (Personal Team).
-3. Enable **App Groups** with ID `group.com.1kub.safaritabtab` in both targets.
-4. Build and install:
-
-```bash
-chmod +x Scripts/reinstall.sh
-./Scripts/reinstall.sh
-```
-
-5. Safari → **Settings → Extensions** → enable **Safari Tab Tab Extension** → “Always Allow on Every Website”.
-6. Keep the **Safari Tab Tab** icon in the Safari toolbar (required for reliable operation).
-
-## Re-sign after 7 days (free provisioning)
-
-Without a paid Developer account, the signature expires after about **7 days**.
-
-**From the Safari Tab Tab menu bar icon:** “Re-sign App” (or in Terminal):
-
-```bash
-./Scripts/reinstall.sh
-```
-
-The script builds the app, installs it to `/Applications/Safari Tab Tab.app`, and launches it.
-
-## System impact
-
-- Safari Tab Tab runs as a **menu bar agent** — minimal CPU usage (no polling, only Safari events).
-- Tab history is stored locally in an App Group.
-
-## Project structure
-
-```
-SafariTabTab/                 — menu bar app + picker
-SafariTabTab Extension/       — Safari extension + content.js
-Shared/                       — MRU store
-Scripts/reinstall.sh          — build + install
-```
+- Enabling the extension in Safari — you must click it once
+- Free signing expires every ~7 days — re-run `install.sh`
+- App Store install without a paid Developer account ($99/year)
 
 ## Bundle identifiers
 
@@ -72,8 +80,6 @@ Scripts/reinstall.sh          — build + install
 | App | `com.1kub.safaritabtab` |
 | Extension | `com.1kub.safaritabtab.extension` |
 | App Group | `group.com.1kub.safaritabtab` |
-
-> After renaming bundle IDs, remove any previous build from `/Applications` and re-enable the extension in Safari.
 
 ## License
 
