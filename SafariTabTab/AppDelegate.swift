@@ -36,10 +36,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupNotifications() {
         let center = DistributedNotificationCenter.default()
-        center.addObserver(self, selector: #selector(handlePickerOpen(_:)), name: Notification.Name(TabTabConstants.NotificationName.pickerOpen), object: nil)
-        center.addObserver(self, selector: #selector(handlePickerStep(_:)), name: Notification.Name(TabTabConstants.NotificationName.pickerStep), object: nil)
-        center.addObserver(self, selector: #selector(handlePickerCommit(_:)), name: Notification.Name(TabTabConstants.NotificationName.pickerCommit), object: nil)
-        center.addObserver(self, selector: #selector(refreshStatusTitle), name: Notification.Name(TabTabConstants.NotificationName.historyUpdated), object: nil)
+        center.addObserver(self, selector: #selector(handlePickerOpen(_:)), name: Notification.Name(SafariTabTabConstants.NotificationName.pickerOpen), object: nil)
+        center.addObserver(self, selector: #selector(handlePickerStep(_:)), name: Notification.Name(SafariTabTabConstants.NotificationName.pickerStep), object: nil)
+        center.addObserver(self, selector: #selector(handlePickerCommit(_:)), name: Notification.Name(SafariTabTabConstants.NotificationName.pickerCommit), object: nil)
+        center.addObserver(self, selector: #selector(refreshStatusTitle), name: Notification.Name(SafariTabTabConstants.NotificationName.historyUpdated), object: nil)
     }
 
     private func statusTitle() -> String {
@@ -80,7 +80,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let scriptURL = Bundle.main.url(forResource: "reinstall", withExtension: "sh") else {
             presentAlert(
                 title: "Script not found",
-                message: "Run in Terminal:\ncd ~/Documents/tabtabextension && ./Scripts/reinstall.sh"
+                message: "Run in Terminal:\ncd ~/Documents/safari-tab-tab && ./Scripts/reinstall.sh\n(or open SafariTabTab.xcodeproj and build from Xcode)"
             )
             return
         }
@@ -89,7 +89,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         task.executableURL = URL(fileURLWithPath: "/bin/bash")
         task.arguments = [scriptURL.path]
         task.environment = ProcessInfo.processInfo.environment.merging([
-            "TABTAB_PROJECT_DIR": NSHomeDirectory() + "/Documents/tabtabextension"
+            "SAFARI_TAB_TAB_PROJECT_DIR": resolveProjectDirectory()
         ]) { _, new in new }
 
         do {
@@ -122,5 +122,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         alert.messageText = title
         alert.informativeText = message
         alert.runModal()
+    }
+
+    private func resolveProjectDirectory() -> String {
+        let candidates = [
+            NSHomeDirectory() + "/Documents/safari-tab-tab",
+            NSHomeDirectory() + "/Documents/tabtabextension",
+        ]
+        for path in candidates {
+            let script = (path as NSString).appendingPathComponent("Scripts/reinstall.sh")
+            if FileManager.default.fileExists(atPath: script) {
+                return path
+            }
+        }
+        return candidates[0]
     }
 }

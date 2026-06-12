@@ -2,11 +2,12 @@
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-SCHEME="TabTab"
-PROJECT="$PROJECT_DIR/TabTab.xcodeproj"
+SCHEME="SafariTabTab"
+PROJECT="$PROJECT_DIR/SafariTabTab.xcodeproj"
 CONFIGURATION="${1:-Debug}"
+APP_NAME="Safari Tab Tab"
 
-echo "→ Building Safari Tab Tab ($CONFIGURATION)"
+echo "→ Building $APP_NAME ($CONFIGURATION)"
 cd "$PROJECT_DIR"
 
 xcodebuild \
@@ -16,18 +17,19 @@ xcodebuild \
   -derivedDataPath "$PROJECT_DIR/.derivedData" \
   build
 
-APP_PATH="$PROJECT_DIR/.derivedData/Build/Products/$CONFIGURATION/TabTab.app"
+APP_PATH="$PROJECT_DIR/.derivedData/Build/Products/$CONFIGURATION/$APP_NAME.app"
 if [[ ! -d "$APP_PATH" ]]; then
   echo "Error: could not find $APP_PATH" >&2
   exit 1
 fi
 
-echo "→ Installing to /Applications/TabTab.app"
-rm -rf "/Applications/TabTab.app"
-ditto "$APP_PATH" "/Applications/TabTab.app"
+INSTALL_PATH="/Applications/$APP_NAME.app"
+echo "→ Installing to $INSTALL_PATH"
+rm -rf "$INSTALL_PATH"
+ditto "$APP_PATH" "$INSTALL_PATH"
 
-echo "→ Launching Safari Tab Tab"
-open -a "/Applications/TabTab.app"
+echo "→ Launching $APP_NAME"
+open -a "$INSTALL_PATH"
 
 cat <<EOF
 

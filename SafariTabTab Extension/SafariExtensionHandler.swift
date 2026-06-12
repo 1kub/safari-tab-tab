@@ -28,7 +28,7 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
     }
 
     override func messageReceivedFromContainingApp(withName messageName: String, userInfo: [String: Any]?) {
-        guard let command = TabTabConstants.ExtensionCommand(rawValue: messageName) else { return }
+        guard let command = SafariTabTabConstants.ExtensionCommand(rawValue: messageName) else { return }
         switch command {
         case .activateTab:
             guard let tabID = userInfo?["tabID"] as? Int else { return }
@@ -55,7 +55,7 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
         await TabHistorySync.updateHistory(for: window)
         let windowID = await TabHistorySync.windowID(for: window)
         DistributedNotificationCenter.default().postNotificationName(
-            Notification.Name(TabTabConstants.NotificationName.pickerOpen),
+            Notification.Name(SafariTabTabConstants.NotificationName.pickerOpen),
             object: windowID,
             userInfo: ["backward": backward],
             deliverImmediately: true
@@ -64,7 +64,7 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
 
     private func notifyPickerStep(backward: Bool) {
         DistributedNotificationCenter.default().postNotificationName(
-            Notification.Name(TabTabConstants.NotificationName.pickerStep),
+            Notification.Name(SafariTabTabConstants.NotificationName.pickerStep),
             object: nil,
             userInfo: ["backward": backward],
             deliverImmediately: true
@@ -73,7 +73,7 @@ final class SafariExtensionHandler: SFSafariExtensionHandler {
 
     private func notifyPickerCommit() {
         DistributedNotificationCenter.default().postNotificationName(
-            Notification.Name(TabTabConstants.NotificationName.pickerCommit),
+            Notification.Name(SafariTabTabConstants.NotificationName.pickerCommit),
             object: nil,
             userInfo: nil,
             deliverImmediately: true

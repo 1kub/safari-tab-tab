@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA5000010000000000000001"
-               BuildableName = "TabTab.app"
-               BlueprintName = "TabTab"
-               ReferencedContainer = "container:TabTab.xcodeproj">
+               BuildableName = "Safari Tab Tab.app"
+               BlueprintName = "Safari Tab Tab"
+               ReferencedContainer = "container:SafariTabTab.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA5000010000000000000001"
-            BuildableName = "TabTab.app"
-            BlueprintName = "TabTab"
-            ReferencedContainer = "container:TabTab.xcodeproj">
+            BuildableName = "Safari Tab Tab.app"
+            BlueprintName = "Safari Tab Tab"
+            ReferencedContainer = "container:SafariTabTab.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AA5000010000000000000001"
-            BuildableName = "TabTab.app"
-            BlueprintName = "TabTab"
-            ReferencedContainer = "container:TabTab.xcodeproj">
+            BuildableName = "Safari Tab Tab.app"
+            BlueprintName = "Safari Tab Tab"
+            ReferencedContainer = "container:SafariTabTab.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

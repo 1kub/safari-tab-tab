@@ -111,8 +111,8 @@ final class PickerPanelController: NSWindowController {
         let tabID = tabs[selectedIndex].id
         Task {
             _ = try? await SFSafariApplication.dispatchMessage(
-                withName: TabTabConstants.ExtensionCommand.activateTab.rawValue,
-                toExtensionWithIdentifier: TabTabConstants.extensionBundleID,
+                withName: SafariTabTabConstants.ExtensionCommand.activateTab.rawValue,
+                toExtensionWithIdentifier: SafariTabTabConstants.extensionBundleID,
                 userInfo: ["tabID": tabID, "windowID": windowID]
             )
             await MainActor.run {

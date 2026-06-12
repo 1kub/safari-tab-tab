@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		AA1000010000000000000001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000001 /* AppDelegate.swift */; };
 		AA1000010000000000000002 /* PickerPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000002 /* PickerPanelController.swift */; };
-		AA1000010000000000000003 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000003 /* Constants.swift */; };
+		AA1000010000000000000003 /* SafariTabTabConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000003 /* SafariTabTabConstants.swift */; };
 		AA1000010000000000000004 /* TabHistoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000004 /* TabHistoryModels.swift */; };
 		AA1000010000000000000005 /* reinstall.sh in Resources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000005 /* reinstall.sh */; };
-		AA1000010000000000000006 /* TabTab Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000006 /* TabTab Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AA1000010000000000000006 /* Safari Tab Tab Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000006 /* Safari Tab Tab Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AA1000010000000000000007 /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000007 /* SafariExtensionHandler.swift */; };
-		AA1000010000000000000008 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000003 /* Constants.swift */; };
+		AA1000010000000000000008 /* SafariTabTabConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000003 /* SafariTabTabConstants.swift */; };
 		AA1000010000000000000009 /* TabHistoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2000010000000000000004 /* TabHistoryModels.swift */; };
 		AA100001000000000000000A /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = AA200001000000000000000A /* content.js */; };
 		AA100001000000000000000B /* ToolbarItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = AA200001000000000000000B /* ToolbarItemIcon.png */; };
@@ -26,7 +26,7 @@
 			containerPortal = AA4000010000000000000001 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = AA5000010000000000000002;
-			remoteInfo = "TabTab Extension";
+			remoteInfo = "Safari Tab Tab Extension";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -37,7 +37,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AA1000010000000000000006 /* TabTab Extension.appex in Embed Foundation Extensions */,
+				AA1000010000000000000006 /* Safari Tab Tab Extension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,18 +47,18 @@
 /* Begin PBXFileReference section */
 		AA2000010000000000000001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA2000010000000000000002 /* PickerPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerPanelController.swift; sourceTree = "<group>"; };
-		AA2000010000000000000003 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		AA2000010000000000000003 /* SafariTabTabConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariTabTabConstants.swift; sourceTree = "<group>"; };
 		AA2000010000000000000004 /* TabHistoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabHistoryModels.swift; sourceTree = "<group>"; };
 		AA2000010000000000000005 /* reinstall.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = reinstall.sh; sourceTree = "<group>"; };
-		AA2000010000000000000006 /* TabTab Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "TabTab Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2000010000000000000006 /* Safari Tab Tab Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Safari Tab Tab Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2000010000000000000007 /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
-		AA2000010000000000000008 /* TabTab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabTab.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA2000010000000000000008 /* Safari Tab Tab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Safari Tab Tab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA2000010000000000000009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA200001000000000000000A /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = content.js; sourceTree = "<group>"; };
 		AA200001000000000000000B /* ToolbarItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarItemIcon.png; sourceTree = "<group>"; };
 		AA200001000000000000000C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AA200001000000000000000D /* TabTab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TabTab.entitlements; sourceTree = "<group>"; };
-		AA200001000000000000000E /* TabTab Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TabTab Extension.entitlements"; sourceTree = "<group>"; };
+		AA200001000000000000000D /* SafariTabTab.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SafariTabTab.entitlements; sourceTree = "<group>"; };
+		AA200001000000000000000E /* SafariTabTab Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SafariTabTab Extension.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				AA8000010000000000000002 /* Shared */,
-				AA8000010000000000000003 /* TabTab */,
-				AA8000010000000000000004 /* TabTab Extension */,
+				AA8000010000000000000003 /* SafariTabTab */,
+				AA8000010000000000000004 /* SafariTabTab Extension */,
 				AA8000010000000000000005 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,41 +92,41 @@
 		AA8000010000000000000002 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				AA2000010000000000000003 /* Constants.swift */,
+				AA2000010000000000000003 /* SafariTabTabConstants.swift */,
 				AA2000010000000000000004 /* TabHistoryModels.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		AA8000010000000000000003 /* TabTab */ = {
+		AA8000010000000000000003 /* SafariTabTab */ = {
 			isa = PBXGroup;
 			children = (
 				AA2000010000000000000001 /* AppDelegate.swift */,
 				AA2000010000000000000002 /* PickerPanelController.swift */,
 				AA2000010000000000000009 /* Info.plist */,
-				AA200001000000000000000D /* TabTab.entitlements */,
+				AA200001000000000000000D /* SafariTabTab.entitlements */,
 				AA8000010000000000000006 /* Resources */,
 			);
-			path = TabTab;
+			path = SafariTabTab;
 			sourceTree = "<group>";
 		};
-		AA8000010000000000000004 /* TabTab Extension */ = {
+		AA8000010000000000000004 /* SafariTabTab Extension */ = {
 			isa = PBXGroup;
 			children = (
 				AA2000010000000000000007 /* SafariExtensionHandler.swift */,
 				AA200001000000000000000A /* content.js */,
 				AA200001000000000000000B /* ToolbarItemIcon.png */,
 				AA200001000000000000000C /* Info.plist */,
-				AA200001000000000000000E /* TabTab Extension.entitlements */,
+				AA200001000000000000000E /* SafariTabTab Extension.entitlements */,
 			);
-			path = "TabTab Extension";
+			path = "SafariTabTab Extension";
 			sourceTree = "<group>";
 		};
 		AA8000010000000000000005 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA2000010000000000000008 /* TabTab.app */,
-				AA2000010000000000000006 /* TabTab Extension.appex */,
+				AA2000010000000000000008 /* Safari Tab Tab.app */,
+				AA2000010000000000000006 /* Safari Tab Tab Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,9 +142,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AA5000010000000000000001 /* TabTab */ = {
+		AA5000010000000000000001 /* Safari Tab Tab */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA9000010000000000000003 /* Build configuration list for PBXNativeTarget "TabTab" */;
+			buildConfigurationList = AA9000010000000000000003 /* Build configuration list for PBXNativeTarget "Safari Tab Tab" */;
 			buildPhases = (
 				AAA000010000000000000001 /* Sources */,
 				AA7000010000000000000001 /* Frameworks */,
@@ -156,14 +156,14 @@
 			dependencies = (
 				AA5000010000000000000003 /* PBXTargetDependency */,
 			);
-			name = TabTab;
-			productName = TabTab;
-			productReference = AA2000010000000000000008 /* TabTab.app */;
+			name = "Safari Tab Tab";
+			productName = "Safari Tab Tab";
+			productReference = AA2000010000000000000008 /* Safari Tab Tab.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AA5000010000000000000002 /* TabTab Extension */ = {
+		AA5000010000000000000002 /* Safari Tab Tab Extension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA9000010000000000000004 /* Build configuration list for PBXNativeTarget "TabTab Extension" */;
+			buildConfigurationList = AA9000010000000000000004 /* Build configuration list for PBXNativeTarget "Safari Tab Tab Extension" */;
 			buildPhases = (
 				AAA000010000000000000003 /* Sources */,
 				AA7000010000000000000002 /* Frameworks */,
@@ -173,9 +173,9 @@
 			);
 			dependencies = (
 			);
-			name = "TabTab Extension";
-			productName = "TabTab Extension";
-			productReference = AA2000010000000000000006 /* TabTab Extension.appex */;
+			name = "Safari Tab Tab Extension";
+			productName = "Safari Tab Tab Extension";
+			productReference = AA2000010000000000000006 /* Safari Tab Tab Extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
@@ -196,7 +196,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AA9000010000000000000001 /* Build configuration list for PBXProject "TabTab" */;
+			buildConfigurationList = AA9000010000000000000001 /* Build configuration list for PBXProject "SafariTabTab" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -209,8 +209,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AA5000010000000000000001 /* TabTab */,
-				AA5000010000000000000002 /* TabTab Extension */,
+				AA5000010000000000000001 /* Safari Tab Tab */,
+				AA5000010000000000000002 /* Safari Tab Tab Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -242,7 +242,7 @@
 			files = (
 				AA1000010000000000000001 /* AppDelegate.swift in Sources */,
 				AA1000010000000000000002 /* PickerPanelController.swift in Sources */,
-				AA1000010000000000000003 /* Constants.swift in Sources */,
+				AA1000010000000000000003 /* SafariTabTabConstants.swift in Sources */,
 				AA1000010000000000000004 /* TabHistoryModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,7 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA1000010000000000000007 /* SafariExtensionHandler.swift in Sources */,
-				AA1000010000000000000008 /* Constants.swift in Sources */,
+				AA1000010000000000000008 /* SafariTabTabConstants.swift in Sources */,
 				AA1000010000000000000009 /* TabHistoryModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,7 +262,7 @@
 /* Begin PBXTargetDependency section */
 		AA5000010000000000000003 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AA5000010000000000000002 /* TabTab Extension */;
+			target = AA5000010000000000000002 /* Safari Tab Tab Extension */;
 			targetProxy = AA3000010000000000000001 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -310,20 +310,20 @@
 		AAB000010000000000000003 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = TabTab/TabTab.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SafariTabTab/SafariTabTab.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = TabTab/Info.plist;
+				INFOPLIST_FILE = SafariTabTab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = local.tabtab;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.1kub.safaritabtab;
+				PRODUCT_NAME = "Safari Tab Tab";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -331,20 +331,20 @@
 		AAB000010000000000000004 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = TabTab/TabTab.entitlements;
+				CODE_SIGN_ENTITLEMENTS = SafariTabTab/SafariTabTab.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = TabTab/Info.plist;
+				INFOPLIST_FILE = SafariTabTab/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = local.tabtab;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.1kub.safaritabtab;
+				PRODUCT_NAME = "Safari Tab Tab";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -352,19 +352,19 @@
 		AAB000010000000000000005 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "TabTab Extension/TabTab Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "SafariTabTab Extension/SafariTabTab Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "TabTab Extension/Info.plist";
+				INFOPLIST_FILE = "SafariTabTab Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = local.tabtab.extension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.1kub.safaritabtab.extension;
+				PRODUCT_NAME = "Safari Tab Tab Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -373,19 +373,19 @@
 		AAB000010000000000000006 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "TabTab Extension/TabTab Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "SafariTabTab Extension/SafariTabTab Extension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = "TabTab Extension/Info.plist";
+				INFOPLIST_FILE = "SafariTabTab Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = local.tabtab.extension;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.1kub.safaritabtab.extension;
+				PRODUCT_NAME = "Safari Tab Tab Extension";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -394,7 +394,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AA9000010000000000000001 /* Build configuration list for PBXProject "TabTab" */ = {
+		AA9000010000000000000001 /* Build configuration list for PBXProject "SafariTabTab" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAB000010000000000000001 /* Debug */,
@@ -403,7 +403,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA9000010000000000000003 /* Build configuration list for PBXNativeTarget "TabTab" */ = {
+		AA9000010000000000000003 /* Build configuration list for PBXNativeTarget "Safari Tab Tab" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAB000010000000000000003 /* Debug */,
@@ -412,7 +412,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA9000010000000000000004 /* Build configuration list for PBXNativeTarget "TabTab Extension" */ = {
+		AA9000010000000000000004 /* Build configuration list for PBXNativeTarget "Safari Tab Tab Extension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AAB000010000000000000005 /* Debug */,

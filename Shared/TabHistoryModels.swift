@@ -26,11 +26,11 @@ struct WindowHistory: Codable, Equatable {
 
 struct TabHistoryStore {
     private static var defaults: UserDefaults {
-        UserDefaults(suiteName: TabTabConstants.appGroupID) ?? .standard
+        UserDefaults(suiteName: SafariTabTabConstants.appGroupID) ?? .standard
     }
 
     static func loadWindows() -> [WindowHistory] {
-        guard let data = defaults.data(forKey: TabTabConstants.StoreKey.windows) else {
+        guard let data = defaults.data(forKey: SafariTabTabConstants.StoreKey.windows) else {
             return []
         }
         return (try? JSONDecoder().decode([WindowHistory].self, from: data)) ?? []
@@ -38,9 +38,9 @@ struct TabHistoryStore {
 
     static func saveWindows(_ windows: [WindowHistory]) {
         guard let data = try? JSONEncoder().encode(windows) else { return }
-        defaults.set(data, forKey: TabTabConstants.StoreKey.windows)
+        defaults.set(data, forKey: SafariTabTabConstants.StoreKey.windows)
         DistributedNotificationCenter.default().post(
-            name: Notification.Name(TabTabConstants.NotificationName.historyUpdated),
+            name: Notification.Name(SafariTabTabConstants.NotificationName.historyUpdated),
             object: nil
         )
     }
@@ -62,20 +62,20 @@ struct TabHistoryStore {
     }
 
     static func installDate() -> Date {
-        if let stored = defaults.object(forKey: TabTabConstants.StoreKey.installDate) as? Date {
+        if let stored = defaults.object(forKey: SafariTabTabConstants.StoreKey.installDate) as? Date {
             return stored
         }
         let now = Date()
-        defaults.set(now, forKey: TabTabConstants.StoreKey.installDate)
+        defaults.set(now, forKey: SafariTabTabConstants.StoreKey.installDate)
         return now
     }
 
     static func refreshInstallDate() {
-        defaults.set(Date(), forKey: TabTabConstants.StoreKey.installDate)
+        defaults.set(Date(), forKey: SafariTabTabConstants.StoreKey.installDate)
     }
 
     static func daysUntilExpiry(from installDate: Date = installDate()) -> Int {
         let elapsed = Calendar.current.dateComponents([.day], from: installDate, to: Date()).day ?? 0
-        return max(0, TabTabConstants.freeProvisioningDays - elapsed)
+        return max(0, SafariTabTabConstants.freeProvisioningDays - elapsed)
     }
 }
