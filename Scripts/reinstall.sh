@@ -6,7 +6,7 @@ SCHEME="TabTab"
 PROJECT="$PROJECT_DIR/TabTab.xcodeproj"
 CONFIGURATION="${1:-Debug}"
 
-echo "→ Building TabTab ($CONFIGURATION)"
+echo "→ Building Safari Tab Tab ($CONFIGURATION)"
 cd "$PROJECT_DIR"
 
 xcodebuild \
@@ -26,14 +26,14 @@ echo "→ Installing to /Applications/TabTab.app"
 rm -rf "/Applications/TabTab.app"
 ditto "$APP_PATH" "/Applications/TabTab.app"
 
-echo "→ Launching TabTab"
+echo "→ Launching Safari Tab Tab"
 open -a "/Applications/TabTab.app"
 
 cat <<EOF
 
 Done.
 1. Open Safari → Settings → Extensions
-2. Enable "TabTab Extension"
+2. Enable "Safari Tab Tab Extension"
 3. Allow on all websites
 
 Free provisioning expires in about 7 days — run again:
