@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>TabTab Extension</string>
+	<string>Safari Tab Tab Extension</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleName</key>
@@ -36,7 +36,7 @@
 			<key>Image</key>
 			<string>ToolbarItemIcon.png</string>
 			<key>Label</key>
-			<string>TabTab</string>
+			<string>Safari Tab Tab</string>
 		</dict>
 		<key>SFSafariWebsiteAccess</key>
 		<dict>
@@ -45,6 +45,6 @@
 		</dict>
 	</dict>
 	<key>NSHumanReadableDescription</key>
-	<string>Prepínanie Safari tabov v MRU poradí cez Control+Tab.</string>
+	<string>Switch Safari tabs in MRU order with Control+Tab.</string>
 </dict>
 </plist>

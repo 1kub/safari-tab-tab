@@ -20,17 +20,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         guard let button = statusItem?.button else { return }
-        button.image = NSImage(systemSymbolName: "arrow.left.arrow.right.square", accessibilityDescription: "TabTab")
+        button.image = NSImage(systemSymbolName: "arrow.left.arrow.right.square", accessibilityDescription: "Safari Tab Tab")
         button.image?.isTemplate = true
 
         let menu = NSMenu()
         menu.addItem(withTitle: statusTitle(), action: nil, keyEquivalent: "")
         menu.items.last?.isEnabled = false
         menu.addItem(.separator())
-        menu.addItem(withTitle: "Obnoviť podpis (⌘R)", action: #selector(runReinstall), keyEquivalent: "r")
-        menu.addItem(withTitle: "Otvoriť Safari Extensions…", action: #selector(openSafariExtensions), keyEquivalent: "")
+        menu.addItem(withTitle: "Re-sign App (⌘R)", action: #selector(runReinstall), keyEquivalent: "r")
+        menu.addItem(withTitle: "Open Safari Extensions…", action: #selector(openSafariExtensions), keyEquivalent: "")
         menu.addItem(.separator())
-        menu.addItem(withTitle: "Ukončiť TabTab", action: #selector(quit), keyEquivalent: "q")
+        menu.addItem(withTitle: "Quit Safari Tab Tab", action: #selector(quit), keyEquivalent: "q")
         statusItem?.menu = menu
     }
 
@@ -45,9 +45,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private func statusTitle() -> String {
         let days = TabHistoryStore.daysUntilExpiry()
         if days == 0 {
-            return "TabTab — podpis dnes vyprší"
+            return "Safari Tab Tab — signature expires today"
         }
-        return "TabTab — podpis vyprší o \(days) d."
+        return "Safari Tab Tab — signature expires in \(days) d"
     }
 
     @objc private func refreshStatusTitle() {
@@ -79,8 +79,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func runReinstall() {
         guard let scriptURL = Bundle.main.url(forResource: "reinstall", withExtension: "sh") else {
             presentAlert(
-                title: "Skript nenájdený",
-                message: "Spusti v Termináli:\ncd ~/Documents/tabtabextension && ./Scripts/reinstall.sh"
+                title: "Script not found",
+                message: "Run in Terminal:\ncd ~/Documents/tabtabextension && ./Scripts/reinstall.sh"
             )
             return
         }
@@ -97,11 +97,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             TabHistoryStore.refreshInstallDate()
             refreshStatusTitle()
             presentAlert(
-                title: "Obnova spustená",
-                message: "Build beží na pozadí. Po dokončení skontroluj Safari → Rozšírenia."
+                title: "Re-sign started",
+                message: "Build is running in the background. When it finishes, check Safari → Extensions."
             )
         } catch {
-            presentAlert(title: "Chyba", message: error.localizedDescription)
+            presentAlert(title: "Error", message: error.localizedDescription)
         }
     }
 

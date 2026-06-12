@@ -1,63 +1,63 @@
-# TabTab
+# Safari Tab Tab
 
-Ľahké Safari rozšírenie pre **MRU prepínanie tabov** cez `Control+Tab` (správanie podobné Firefoxu / Alt+Tab).
+A lightweight Safari extension for **MRU tab switching** with `Control+Tab` (Firefox / Alt+Tab style behavior).
 
 - macOS 13+
-- Natívny Swift, žiadna sieť, žiadna analytika
-- Menu bar agent (bez ikony v Docku)
+- Native Swift, no network calls, no analytics
+- Menu bar agent (no Dock icon)
 - Open source (MIT)
 
-## Správanie
+## Behavior
 
-| Akcia | Výsledok |
-|-------|----------|
-| Krátke `Ctrl+Tab` | Prepne na predchádzajúci (MRU) tab |
-| Drž `Ctrl+Tab` ~0,2 s | Zobrazí picker nedávnych tabov |
-| `Ctrl+Tab` pri otvorenom pickeri | Posun v histórii dopredu |
-| `Ctrl+Shift+Tab` | Posun v histórii dozadu |
-| Pustenie `Ctrl` | Prepne na vybraný tab |
+| Action | Result |
+|--------|--------|
+| Quick `Ctrl+Tab` | Switch to the previous (MRU) tab |
+| Hold `Ctrl+Tab` ~0.2s | Show a picker of recent tabs |
+| `Ctrl+Tab` while picker is open | Move forward in history |
+| `Ctrl+Shift+Tab` | Move backward in history |
+| Release `Ctrl` | Switch to the selected tab |
 
-## Prvé spustenie (bezplatný Apple účet)
+## First-time setup (free Apple ID)
 
-1. Otvor `TabTab.xcodeproj` v Xcode.
-2. V oboch targetoch (`TabTab`, `TabTab Extension`) nastav **Signing & Capabilities** → tvoj Apple ID (Personal Team).
-3. Zapni **App Groups** s ID `group.local.tabtab.shared` v oboch targetoch.
-4. Spusti build:
+1. Open `TabTab.xcodeproj` in Xcode.
+2. In both targets (`TabTab`, `TabTab Extension`), set **Signing & Capabilities** to your Apple ID (Personal Team).
+3. Enable **App Groups** with ID `group.local.tabtab.shared` in both targets.
+4. Build and install:
 
 ```bash
 chmod +x Scripts/reinstall.sh
 ./Scripts/reinstall.sh
 ```
 
-5. Safari → **Nastavenia → Rozšírenia** → zapni **TabTab Extension** → „Povoliť na každej webovej stránke“.
-6. Nechaj ikonu TabTab v Safari toolbare (je potrebná pre správne fungovanie).
+5. Safari → **Settings → Extensions** → enable **TabTab Extension** → “Always Allow on Every Website”.
+6. Keep the TabTab icon in the Safari toolbar (required for reliable operation).
 
-## Obnova po 7 dňoch (free provisioning)
+## Re-sign after 7 days (free provisioning)
 
-Bez plateného Developer účtu podpis vyprší približne po **7 dňoch**.
+Without a paid Developer account, the signature expires after about **7 days**.
 
-**Z menu bar ikony TabTab:** „Obnoviť podpis“ (alebo v Termináli):
+**From the TabTab menu bar icon:** “Re-sign App” (or in Terminal):
 
 ```bash
 ./Scripts/reinstall.sh
 ```
 
-Skript zbuildí appku, nainštaluje ju do `/Applications/TabTab.app` a spustí ju.
+The script builds the app, installs it to `/Applications/TabTab.app`, and launches it.
 
-## Požiadavky na systém
+## System impact
 
-- TabTab beží ako **menu bar agent** — spotrebuje minimum CPU (žiadne polling, len eventy z Safari).
-- História tabov je uložená lokálne v App Group.
+- TabTab runs as a **menu bar agent** — minimal CPU usage (no polling, only Safari events).
+- Tab history is stored locally in an App Group.
 
-## Štruktúra
+## Project structure
 
 ```
 TabTab/                 — menu bar app + picker
 TabTab Extension/       — Safari extension + content.js
 Shared/                 — MRU store
-Scripts/reinstall.sh    — build + inštalácia
+Scripts/reinstall.sh    — build + install
 ```
 
-## GitHub
+## License
 
-Projekt je open source. Ak chceš verejný repozitár, nahraj obsah tohto priečinka na GitHub — credentials sem neukladaj.
+MIT — see [LICENSE](LICENSE).

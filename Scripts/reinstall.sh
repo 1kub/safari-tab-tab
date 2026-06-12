@@ -6,7 +6,7 @@ SCHEME="TabTab"
 PROJECT="$PROJECT_DIR/TabTab.xcodeproj"
 CONFIGURATION="${1:-Debug}"
 
-echo "→ Build TabTab ($CONFIGURATION)"
+echo "→ Building TabTab ($CONFIGURATION)"
 cd "$PROJECT_DIR"
 
 xcodebuild \
@@ -18,24 +18,24 @@ xcodebuild \
 
 APP_PATH="$PROJECT_DIR/.derivedData/Build/Products/$CONFIGURATION/TabTab.app"
 if [[ ! -d "$APP_PATH" ]]; then
-  echo "Chyba: nenašiel som $APP_PATH" >&2
+  echo "Error: could not find $APP_PATH" >&2
   exit 1
 fi
 
-echo "→ Inštalujem do /Applications/TabTab.app"
+echo "→ Installing to /Applications/TabTab.app"
 rm -rf "/Applications/TabTab.app"
 ditto "$APP_PATH" "/Applications/TabTab.app"
 
-echo "→ Spúšťam TabTab"
+echo "→ Launching TabTab"
 open -a "/Applications/TabTab.app"
 
 cat <<EOF
 
-Hotovo.
-1. Otvor Safari → Nastavenia → Rozšírenia
-2. Zapni „TabTab Extension“
-3. Povoľ na všetkých weboch
+Done.
+1. Open Safari → Settings → Extensions
+2. Enable "TabTab Extension"
+3. Allow on all websites
 
-Bezplatný podpis vyprší o 7 dní — spusti znova:
+Free provisioning expires in about 7 days — run again:
   $PROJECT_DIR/Scripts/reinstall.sh
 EOF

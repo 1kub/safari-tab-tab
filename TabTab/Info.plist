@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>sk</string>
+	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>TabTab</string>
+	<string>Safari Tab Tab</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

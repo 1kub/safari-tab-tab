@@ -5,7 +5,7 @@ PROJECT_DIR="${TABTAB_PROJECT_DIR:-$HOME/Documents/tabtabextension}"
 SCRIPT="$PROJECT_DIR/Scripts/reinstall.sh"
 
 if [[ ! -f "$SCRIPT" ]]; then
-  osascript -e "display alert \"TabTab\" message \"Nenašiel som projekt v $PROJECT_DIR. Nastav TABTAB_PROJECT_DIR alebo spusti Scripts/reinstall.sh z Terminálu.\""
+  osascript -e "display alert \"Safari Tab Tab\" message \"Could not find the project at $PROJECT_DIR. Set TABTAB_PROJECT_DIR or run Scripts/reinstall.sh from Terminal.\""
   exit 1
 fi
 
